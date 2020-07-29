@@ -21,7 +21,6 @@
 		req.onreadystatechange = (e) => {
 			console.log(JSON.parse(req.responseText));
 			rtpObj1 = JSON.parse(req.responseText);
-			parseObject(10);
 			get2();
 		}
 	}
@@ -34,8 +33,7 @@
 
 		req2.onreadystatechange = (e) => {
 			console.log(JSON.parse(req2.responseText));
-			rtpObj1 = JSON.parse(req2.responseText);
-			parseObject(20);
+			rtpObj2 = JSON.parse(req2.responseText);
 			get3();
 		}
 	}
@@ -48,15 +46,37 @@
 
 		req3.onreadystatechange = (e) => {
 			console.log(JSON.parse(req3.responseText));
-			rtpObj1 = JSON.parse(req3.responseText);
-			parseObject(30);
+			rtpObj3 = JSON.parse(req3.responseText);
+			parseObject();
 		}
 	}
 	
-	function parseObject(x) {
+	function parseObject() {
 		for (var i=0;i<=4;i++) {
-			document.getElementById(x+i+"Container").innerHTML = "<b>"+rtpObj1[i]["dtitulo"];
-			document.getElementById(x+i+"Container").innerHTML += "</b><br>"+rtpObj1[i]["dcoment1"];
+			document.getElementById(10+i+"Container").innerHTML = "<b>"+rtpObj1[i]["dtitulo"];
+			if (rtpObj1[i]["dcoment1"] != "") {
+				document.getElementById(10+i+"Container").innerHTML += "</b><br>"+rtpObj1[i]["dcoment1"];
+			} else {
+				document.getElementById(10+i+"Container").innerHTML += "</b><br>Nenhum artista"
+			}
+		}
+		
+		for (var i=0;i<=4;i++) {
+			document.getElementById(20+i+"Container").innerHTML = "<b>"+rtpObj2[i]["dtitulo"];
+			if (rtpObj1[i]["dcoment1"] != "") {
+				document.getElementById(20+i+"Container").innerHTML += "</b><br>"+rtpObj2[i]["dcoment1"];
+			} else {
+				document.getElementById(20+i+"Container").innerHTML += "</b><br>Nenhum artista"
+			}
+		}
+
+		for (var i=0;i<=4;i++) {
+			document.getElementById(30+i+"Container").innerHTML = "<b>"+rtpObj3[i]["dtitulo"];
+			if (rtpObj1[i]["dcoment1"] != "") {
+				document.getElementById(30+i+"Container").innerHTML += "</b><br>"+rtpObj3[i]["dcoment1"];
+			} else {
+				document.getElementById(30+i+"Container").innerHTML += "</b><br>Nenhum artista"
+			}
 		}
 	}
 	</script>
@@ -71,25 +91,57 @@
   <tr>
     <td>
 		<p id="10Container"></p>
-		<p id="11Container"></p>
-		<p id="12Container"></p>
-		<p id="13Container"></p>
-		<p id="14Container"></p>
 	</td>
     <td>
 		<p id="20Container"></p>
-		<p id="21Container"></p>
-		<p id="22Container"></p>
-		<p id="23Container"></p>
-		<p id="24Container"></p>
 	</td>
 	<td>
 		<p id="30Container"></p>
-		<p id="31Container"></p>
-		<p id="32Container"></p>
-		<p id="33Container"></p>
-		<p id="34Container"></p>	
 	</td>
   </tr>
+  <tr>
+    <td>
+		<p id="11Container"></p>
+	</td>
+    <td>
+		<p id="21Container"></p>
+	</td>
+	<td>
+		<p id="31Container"></p>
+	</td>
+  </tr>
+    <tr>
+    <td>
+		<p id="12Container"></p>
+	</td>
+    <td>
+		<p id="22Container"></p>
+	</td>
+	<td>
+		<p id="32Container"></p>
+	</td>
+  </tr>
+  <tr>
+    <td>
+		<p id="13Container"></p>
+	</td>
+    <td>
+		<p id="23Container"></p>
+	</td>
+	<td>
+		<p id="33Container"></p>
+	</td>
+  </tr>
+    <tr>
+    <td>
+		<p id="14Container"></p>
+	</td>
+    <td>
+		<p id="24Container"></p>
+	</td>
+	<td>
+		<p id="34Container"></p>
+	</td>
+  </tr> 
 </body>
 </html>
