@@ -1,42 +1,95 @@
 <html>
 <head>
 	<title>RTP Stream</title>
-	<script type='text/javascript'>
-	var rtpObj = "";	
-	
-	req = new XMLHttpRequest();
-	req.open("GET", "https://www.rtp.pt/play/livechannelonairnow.php?channel=at1");
-	req.send();
-
-	req.onreadystatechange = (e) => {
-		console.log(JSON.parse(req.responseText));
-		rtpObj = JSON.parse(req.responseText);
-		parseObject();
+	<style>
+	table, th, td {
+	  border: 1px solid black;
+	  border-collapse: collapse;
 	}
+	</style>	
+	<script type='text/javascript'>
+	var rtpObj1 = "";
+	var rtpObj2 = "";
+	var rtpObj3 = "";
 	
-	function parseObject() {
-		for (var i=0;i<=4;i++) {
-			document.getElementById(i+"Title").innerHTML = rtpObj[i]["dtitulo"];
-			document.getElementById(i+"Artist").innerHTML = rtpObj[i]["dcoment1"];
+	function getRtpInfo() {
+		console.info("Sending HTTP request 1...");
+		req = new XMLHttpRequest();
+		req.open("GET", "https://www.rtp.pt/play/livechannelonairnow.php?channel=at1");
+		req.send();
+
+		req.onreadystatechange = (e) => {
+			console.log(JSON.parse(req.responseText));
+			rtpObj1 = JSON.parse(req.responseText);
+			parseObject(10);
+			get2();
 		}
 	}
 	
+	function get2() {
+		console.info("Sending HTTP request 2...");
+		req2 = new XMLHttpRequest();
+		req2.open("GET", "https://www.rtp.pt/play/livechannelonairnow.php?channel=at2");
+		req2.send();
+
+		req2.onreadystatechange = (e) => {
+			console.log(JSON.parse(req2.responseText));
+			rtpObj1 = JSON.parse(req2.responseText);
+			parseObject(20);
+			get3();
+		}
+	}
 	
+	function get3() {
+		console.info("Sending HTTP request 3...");
+		req3 = new XMLHttpRequest();
+		req3.open("GET", "https://www.rtp.pt/play/livechannelonairnow.php?channel=at3");
+		req3.send();
+
+		req3.onreadystatechange = (e) => {
+			console.log(JSON.parse(req3.responseText));
+			rtpObj1 = JSON.parse(req3.responseText);
+			parseObject(30);
+		}
+	}
+	
+	function parseObject(x) {
+		for (var i=0;i<=4;i++) {
+			document.getElementById(x+i+"Container").innerHTML = "<b>"+rtpObj1[i]["dtitulo"];
+			document.getElementById(x+i+"Container").innerHTML += "</b><br>"+rtpObj1[i]["dcoment1"];
+		}
+	}
 	</script>
 </head>
-<body>
-	<h3>Antena 1</h3>
-	<p id="0Title"></p>
-	<p id="0Artist"></p>
-	<p id="1Title"></p>
-	<p id="1Artist"></p>
-	<p id="2Title"></p>
-	<p id="2Artist"></p>
-	<p id="3Title"></p>
-	<p id="3Artist"></p>
-	<p id="4Title"></p>
-	<p id="4Artist"></p>
-
-
+<body onload="getRtpInfo();">
+<table style="">
+  <tr>
+    <th>Antena 1</th>
+    <th>Antena 2</th>
+    <th>Antena 3</th>
+  </tr>
+  <tr>
+    <td>
+		<p id="10Container"></p>
+		<p id="11Container"></p>
+		<p id="12Container"></p>
+		<p id="13Container"></p>
+		<p id="14Container"></p>
+	</td>
+    <td>
+		<p id="20Container"></p>
+		<p id="21Container"></p>
+		<p id="22Container"></p>
+		<p id="23Container"></p>
+		<p id="24Container"></p>
+	</td>
+	<td>
+		<p id="30Container"></p>
+		<p id="31Container"></p>
+		<p id="32Container"></p>
+		<p id="33Container"></p>
+		<p id="34Container"></p>	
+	</td>
+  </tr>
 </body>
 </html>
