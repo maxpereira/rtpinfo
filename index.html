@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>RTP Stream</title>
+	<script type='text/javascript'>
+	var rtpObj = "";	
+	
+	req = new XMLHttpRequest();
+	req.open("GET", "https://www.rtp.pt/play/livechannelonairnow.php?channel=at1");
+	req.send();
+
+	req.onreadystatechange = (e) => {
+		console.log(JSON.parse(req.responseText));
+		rtpObj = JSON.parse(req.responseText);
+		parseObject();
+	}
+	
+	function parseObject() {
+		for (var i=0;i<=4;i++) {
+			document.getElementById(i+"Title").innerHTML = rtpObj[i]["dtitulo"];
+			document.getElementById(i+"Artist").innerHTML = rtpObj[i]["dcoment1"];
+		}
+	}
+	
+	
+	</script>
+</head>
+<body>
+	<h3>Antena 1</h3>
+	<p id="0Title"></p>
+	<p id="0Artist"></p>
+	<p id="1Title"></p>
+	<p id="1Artist"></p>
+	<p id="2Title"></p>
+	<p id="2Artist"></p>
+	<p id="3Title"></p>
+	<p id="3Artist"></p>
+	<p id="4Title"></p>
+	<p id="4Artist"></p>
+
+
+</body>
+</html>
