@@ -1,2 +1,2 @@
 # rtpradio
-Simple page for streaming RTP.pt (Rádio e Televisão de Portugal) radio stations, with program information
+Simple page for showing program information for RTP.pt (Rádio e Televisão de Portugal) radio stations.
