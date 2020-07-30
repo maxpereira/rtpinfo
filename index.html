@@ -15,6 +15,14 @@
 	var rtpObj1 = "";
 	var rtpObj3 = "";
 	
+	// Function adapted from Atul Sharma's reply to this post: https://hashnode.com/post/how-to-get-the-local-time-of-a-particular-timezone-in-javascript-cj703pkwg01t9s5wt8zh37rwz
+	function ptTime() {
+		d = new Date();
+		u = d.getTime() + (d.getTimezoneOffset() * 60000);
+		x = new Date(u + (3600000));
+		return x.toLocaleString();
+	}
+	
 	function getRtpInfo() {
 		console.info("Sending HTTP request 1...");
 		req = new XMLHttpRequest();
@@ -45,9 +53,9 @@
 		for (var i=0;i<=4;i++) {
 			document.getElementById(10+i+"Container").innerHTML = "<b>"+rtpObj1[i]["dtitulo"];
 			if (rtpObj1[i]["dcoment1"] != "") {
-				document.getElementById(10+i+"Container").innerHTML += "</b><br>"+rtpObj1[i]["dcoment1"];
+				document.getElementById(10+i+"Container").innerHTML += "</b><br>"+rtpObj1[i]["dcoment1"]+" - "+rtpObj1[i]["dhora"];
 			} else {
-				document.getElementById(10+i+"Container").innerHTML += "</b><br>Nenhum artista";
+				document.getElementById(10+i+"Container").innerHTML += "</b><br>Nenhum artista"+" - "+rtpObj1[i]["dhora"];
 			}
 		}
 
@@ -58,9 +66,7 @@
 			} else {
 				document.getElementById(30+i+"Container").innerHTML += "</b><br>Nenhum artista";
 			}
-		}
-		
-		document.getElementById("10Container").innerHTML += " - "+rtpObj1[0]["depg"]["duracao"];		
+		}		
 	}
 	</script>
 </head>
@@ -68,47 +74,63 @@
 <table style="">
   <tr>
     <th>Antena 1</th>
-    <th>Antena 3</th>
   </tr>
   <tr>
     <td>
 		<p id="10Container"></p>
-	</td>
-	<td>
-		<p id="30Container"></p>
 	</td>
   </tr>
   <tr>
     <td>
 		<p id="11Container"></p>
 	</td>
-	<td>
-		<p id="31Container"></p>
-	</td>
   </tr>
-    <tr>
+  <tr>
     <td>
 		<p id="12Container"></p>
-	</td>
-	<td>
-		<p id="32Container"></p>
 	</td>
   </tr>
   <tr>
     <td>
 		<p id="13Container"></p>
 	</td>
+  </tr>
+  <tr>
+    <td>
+		<p id="14Container"></p>
+	</td>
+  </tr>
+</table>
+<br>
+<table style="">
+  <tr>
+    <th>Antena 3</th>
+  </tr>
+  <tr>
+	<td>
+		<p id="30Container"></p>
+	</td>
+  </tr>
+  <tr>
+	<td>
+		<p id="31Container"></p>
+	</td>
+  </tr>
+  <tr>
+	<td>
+		<p id="32Container"></p>
+	</td>
+  </tr>
+  <tr>
 	<td>
 		<p id="33Container"></p>
 	</td>
   </tr>
-    <tr>
-    <td>
-		<p id="14Container"></p>
-	</td>
+  <tr>
 	<td>
 		<p id="34Container"></p>
 	</td>
-  </tr> 
+  </tr>
+</table>
 </body>
 </html>
