@@ -19,11 +19,16 @@
 	function ptTime() {
 		d = new Date();
 		u = d.getTime() + (d.getTimezoneOffset() * 60000);
-		x = new Date(u + (3600000));
-		return x.toLocaleString();
+		x = new Date(u + 3600000);
+		xStr = x.toLocaleString()
+		xStr = xStr.slice(0,-3);
+		return xStr;
 	}
 	
+	setInterval(getRtpInfo, 60000);
 	function getRtpInfo() {
+		document.getElementById("curTime").innerHTML = ptTime();
+		console.info("Running heartbeat at "+ptTime());
 		console.info("Sending HTTP request 1...");
 		req = new XMLHttpRequest();
 		req.open("GET", "https://www.rtp.pt/play/livechannelonairnow.php?channel=at1");
@@ -62,15 +67,16 @@
 		for (var i=0;i<=4;i++) {
 			document.getElementById(30+i+"Container").innerHTML = "<b>"+rtpObj3[i]["dtitulo"];
 			if (rtpObj3[i]["dcoment1"] != "") {
-				document.getElementById(30+i+"Container").innerHTML += "</b><br>"+rtpObj3[i]["dcoment1"];
+				document.getElementById(30+i+"Container").innerHTML += "</b><br>"+rtpObj3[i]["dcoment1"]+" - "+rtpObj1[i]["dhora"];
 			} else {
-				document.getElementById(30+i+"Container").innerHTML += "</b><br>Nenhum artista";
+				document.getElementById(30+i+"Container").innerHTML += "</b><br>Nenhum artista"+" - "+rtpObj1[i]["dhora"];
 			}
 		}		
 	}
 	</script>
 </head>
 <body onload="getRtpInfo();">
+<h1 id="curTime"></h1>
 <table style="">
   <tr>
     <th>Antena 1</th>
